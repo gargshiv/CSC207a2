@@ -1,0 +1,177 @@
+#########
+# Step 1
+
+Code affected: none
+
+Created this file.
+#########
+# Step 2
+
+Code affected: all .java files
+
+Reformatted using the Google Java style formatter.
+##################
+# Step 3
+
+Code affected: Path.leave
+
+Flaw: unnecessary if, leading to duplicate code.
+
+Fix: replaced if statement with a single assignment statement.
+##################
+# Step 4
+
+Code affected: IslandSimulation.java
+
+Flaw: Dead Code(variable that is not at all used in the  program)
+
+Fix: Removed ThreadGroup TG[] Array
+##################
+# Step 5
+
+Code affected: IslandSimulation.java
+
+Flaw: Unnecessary memory allotted in maps and person array
+
+Fix: We just need 1 map( changed from array to variable) and 2 people ( changed length from 8 to 2).
+     All the changes were reflected  where ever the maps array was used (into variable).
+
+##################
+# Step 6
+
+Code affected: IslandSimulation.java
+
+Flaw: Class is operating on no official constructor. The variable are not getting initialised in a well to do manner.
+
+Fix: Created a non parameterised constructor and initialised the data members of the class.
+##################
+# Step 7
+
+Code affected: IslandSimulation.java
+
+Flaw: main method is doing too much work, code smell: extreme message chains adopted by main method
+
+Fix: Created a method 'initiate' inside the IslandSimulation class that does all the things that the method main was doing. It makes the code look cleaner as it removes the excess use of the same island simulation object and GIVES WAY TO CREATE MORE ISLANDSIMULATIONS BY ADDING ANOTHER object: making the code more usable and generic.
+##################
+# Step 8
+
+Code affected: MapPanel.addToPanel
+
+Flaw: Extra Variable called Paths: Does essentially nothing - Dead Code
+
+Fix: Removed the variable and method addToPanel now has argument as paths instead of r
+##################
+# Step 9
+
+Code affected: Person1, Person2, Person.add
+
+Flaw: Refused Bequest (Code Smell), no use of Inheritance, repetitive code.
+
+Fix: Person.add now was implemented and had the exact same implementation of the add method in Person1 and Person2. Person1 and Person2 have repetitive code and so are DELETED.
+##################
+# Step 10
+
+Code affected: IslandSimulation.java
+
+Flaw: Because of step 9, Person1 and Person2 classes are no more available. Gives rise to errors.
+
+Fix:IslandSimulation 'initiate' method now initialises people[0] and people[1] as a person instead of person1 and person2.
+##################
+# Step 11
+
+Code affected: Map constructor
+
+Flaw: Initialisation happens in methods instead of constructors : Bad design
+
+Fix: Initialisation now happens centrally in the non parameterised constructor of Map.
+##################
+# Step 12
+
+Code affected: Map.buildPath
+
+Flaw: Many variables with Uncommunicative and Inconsistent names of the class Panel are created to do simple things.
+
+Fix: Using Polymorphism, same variable is used to do multiple things on the Map.
+##################
+# Step 13
+
+Code affected: Direction Constructor
+
+Flaw: the if statement is unnecessary as everytime we are passing a particular direction
+
+Fix: deleted the if statement
+
+##################
+# Step 14
+
+Code affected: NEPath, NWPath, SEPath, SWPath, CornerPath Second Constructors
+
+Flaw: the second constructors are not being used at all: Dead Code
+
+Fix: Deletion of the extra constructors
+##################
+# Step 15
+
+Code affected: NEPath, NWPath, SEPath, SWPath, CornerPath
+
+Flaw: Corner path essentially acts as a 'middle man'(code smell). This causes problems.
+
+Fix: NEPath, NWpath, SEPath, SEPath now extend TwoEndPath instead of CornerPath and TwoEndPath consists of the variables x1 and y1 and method draw with the exact same implementation as the corner path.
+
+##################
+# Step 16
+
+Code affected: EWPath, NSPath, StraightPath, TwoEndPath second constructors
+
+Flaw: The constructors of EWPath, NSPath, TwoEndPath and StraightPath are not being used and cause ambiguity.
+
+Fix: EWPath, NSpath, StraightPath and TwoEndPath no longer have second constructors.
+##################
+# Step 17
+
+Code affected: NSEPath, NSWPath, SNEPath, SNWPath, WENPath, WESPath, EWSPath, EWNPath, SwitchPath second constructors
+
+Flaw: The constructors each are not being used and cause ambiguity.
+
+Fix: The named classes no longer have second constructors, making the code cleaner.
+##################
+# Step 18
+
+Code affected: CrossPath second constructors
+
+Flaw: The constructors each are not being used and cause ambiguity.
+
+Fix: The named classes no longer have second constructors, making the code cleaner.
+###################
+# Step 19
+
+Code affected: Map.java and All path classes i.e, Crosspath, EWNpath, EWpath, EWPath, EWSPath, NEPath, NSEPath, NSPath, NSWPath, NWPath, Path, SEPath, SEPath, SNEPath, SNWPath, StraightPath, SwitchPath, SWPath, TwoendPath, WENPath, WESPath.
+
+Flaw: Grid loc parameters is absolutely unnescessary. Does exactly nothing.
+
+Fix: From the classes mentioned above, all the constructors that had grid loc as a parameter have been removed and all the classes that had grid Loc as a parameter for set Loc method has been removed. No other changes.
+###################
+# Step 20
+
+Code affected: NWPath, Path.java, NEPath, SEPath, SWPath, CrossPath, EWNPath, EWPath, EWSPath, NSEPath, NSPath, NSWPath, NWPath, Path.setLoc, SNEPath, SNWPath, WENPath, WESPath setLoc
+
+Flaw: Path has a useless method called setLoc.
+
+Fix: Path.setLoc has been deleted. All the classes(that are named above) used this method and the implementation of setLoc has been removed from them. Also, the method setLoc has been removed from all these classes and the x and y coordinates are assigned in the constructor itself instead of making a new method for it.
+###################
+# Step 21
+Code affected: Path.java
+
+Flaw: Path has a useless constructor that can be deleted. Also, the remaining constructor has an object b and a method resize that are dead code.
+
+Fix: The extra constructor of Path has been deleted and object b and method resize have been removed.
+###################
+# Step 22
+Code affected: Map.java and Map.spawnTreasure(row,col)
+
+Flaw: spawnTreasure method that has 2 arguments is a method that assigns the new values of the treasure. It is always called from the spawn treasure method that has no arguments.
+    Also, in the map class constructor, we start from hardcoding a treasure from a particular row and column. This is bad design.
+
+Fix: The contents of the spawntreasure method with 2 arguments have been moved to the spawn treasure with no arguments. Code cleaner!
+     The map constructor no longer hard codes the treasure. It is now done by the spawn treasure method that generates the treasure at random.
+
